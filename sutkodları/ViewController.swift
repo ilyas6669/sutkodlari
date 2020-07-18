@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
     
@@ -129,19 +130,29 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var childView2: UIView!
     
+    let tableView = UITableView()
+    
+    let tableView2 = UITableView()
+    
+    var selectedIndex = Int()
+    
+    var itemlist : [NSDictionary] = []
+    
+    var searchitemlist : [NSDictionary] = []
+    
+    var itemlist2 : [NSDictionary] = []
+    
+    var searchitemlist2 : [NSDictionary] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        segmentControl.layer.borderColor = UIColor.white.cgColor
-//        segmentControl.layer.borderWidth = 1
-//        segmentControl.selectedSegmentTintColor = UIColor.white
         
-       childView.alpha = 1
+        
+        childView.alpha = 1
         childView2.alpha = 0
         
-       
-         segmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        
+        segmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         
         view.backgroundColor = .customBackground2()
         
@@ -170,6 +181,10 @@ class ViewController: UIViewController {
         view.addSubview(segmentView)
         
         segmentView.addSubview(segmentControl)
+        
+        childView.addSubview(tableView)
+        
+        childView2.addSubview(tableView2)
         
         _ = topView.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         
@@ -205,39 +220,62 @@ class ViewController: UIViewController {
         
         _ = segmentControl.anchor(top: segmentView.topAnchor, bottom: segmentView.bottomAnchor, leading: segmentView.leadingAnchor, trailing: segmentView.trailingAnchor)
         
+        _ = tableView.anchor(top: childView.topAnchor, bottom: childView.bottomAnchor, leading: childView.leadingAnchor, trailing: childView.trailingAnchor)
+        
+        _ = tableView2.anchor(top: childView2.topAnchor, bottom: childView2.bottomAnchor, leading: childView2.leadingAnchor, trailing: childView2.trailingAnchor)
+        
+        //TableView
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "cell1", bundle: nil), forCellReuseIdentifier: "cell1")
+        tableView.backgroundColor = .customBackground()
         
         
+        
+        //TableView2
+        tableView2.delegate = self
+        tableView2.dataSource = self
+        tableView2.register(UINib(nibName: "cell1", bundle: nil), forCellReuseIdentifier: "cell1")
+         tableView2.backgroundColor = .customBackground()
+//
+//        //SearchBar
+//        searchitemlist = itemlist
+//         searchBar.delegate = self
+        
+         getitemfromDB(query: "", categoryfilter: "")
+        getitemfromDB2(query: "", categoryfilter: "")
+        getveri()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
-           return .lightContent
-       }
+        return .lightContent
+    }
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           
-           if #available(iOS 13.0, *) {
-               let app = UIApplication.shared
-               let statusBarHeight: CGFloat = app.statusBarFrame.size.height
-               
-               let statusbarView = UIView()
+        super.viewWillAppear(animated)
+        
+        if #available(iOS 13.0, *) {
+            let app = UIApplication.shared
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
             statusbarView.backgroundColor = UIColor.customBlue()
-               view.addSubview(statusbarView)
-               
-               statusbarView.translatesAutoresizingMaskIntoConstraints = false
-               statusbarView.heightAnchor
-                   .constraint(equalToConstant: statusBarHeight).isActive = true
-               statusbarView.widthAnchor
-                   .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
-               statusbarView.topAnchor
-                   .constraint(equalTo: view.topAnchor).isActive = true
-               statusbarView.centerXAnchor
-                   .constraint(equalTo: view.centerXAnchor).isActive = true
-               
-           } else {
-               let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-               statusBar?.backgroundColor = UIColor.customBlue()
-           }
-       }
+            view.addSubview(statusbarView)
+            
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+            statusbarView.heightAnchor
+                .constraint(equalToConstant: statusBarHeight).isActive = true
+            statusbarView.widthAnchor
+                .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            statusbarView.topAnchor
+                .constraint(equalTo: view.topAnchor).isActive = true
+            statusbarView.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor).isActive = true
+            
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = UIColor.customBlue()
+        }
+    }
     
     
     @IBAction func actionSegment(_ sender: UISegmentedControl) {
@@ -250,5 +288,239 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    func getveri(){
+        let userRef = Database.database().reference().child("info")
+        
+        userRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            
+            let tarih = value?["tarih"] as? String ?? ""
+            
+            
+            self.lblTarih.text = tarih
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+        
+    }
+    
 }
 
+
+extension ViewController : UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableView2 {
+            return itemlist2.count
+        }
+        return itemlist.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == tableView2 {
+            let cell : cell1 = tableView.dequeueReusableCell(withIdentifier: "cell1") as! cell1
+            cell.selectionStyle = .none
+            cell.btnAction = {
+                () in
+                if self.selectedIndex == indexPath.row {
+                    self.selectedIndex = 0
+                }else{
+                    self.selectedIndex = indexPath.row
+                }
+                tableView.beginUpdates()
+                tableView.endUpdates()
+                
+                UIView.animate(withDuration: 0.5) { () -> Void in
+                    cell.btnImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                }
+                
+            }
+            
+            let value2 = self.itemlist2[indexPath.row]
+            
+            let count = value2["count"] as? String ?? ""
+            let description = value2["description"] as? String ?? ""
+            let extrainfo = value2["extrainfo"] as? String ?? ""
+            let header = value2["header"] as? String ?? ""
+            let Value = value2["value"] as? String ?? ""
+            
+            cell.lblCount.text = count
+            cell.lblLorem.text = description
+            cell.lblExtrainfo.text = extrainfo
+            cell.lblHeader.text = header
+            cell.lblValue.text = Value
+            return cell
+        }
+        let cell2 : cell1 = tableView.dequeueReusableCell(withIdentifier: "cell1") as! cell1
+        cell2.selectionStyle = .none
+        cell2.btnAction = {
+            () in
+            if self.selectedIndex == indexPath.row {
+                self.selectedIndex = 0
+            }else{
+                self.selectedIndex = indexPath.row
+            }
+            tableView.beginUpdates()
+            tableView.endUpdates()
+            
+            UIView.animate(withDuration: 0.5) { () -> Void in
+                cell2.btnImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            }
+            
+        }
+        
+        let value2 = self.itemlist[indexPath.row]
+        
+        let count = value2["count"] as? String ?? ""
+        let description = value2["description"] as? String ?? ""
+        let extrainfo = value2["extrainfo"] as? String ?? ""
+        let header = value2["header"] as? String ?? ""
+        let Value = value2["value"] as? String ?? ""
+        
+        cell2.lblCount.text = count
+        cell2.lblLorem.text = description
+        cell2.lblExtrainfo.text = extrainfo
+        cell2.lblHeader.text = header
+        cell2.lblValue.text = Value
+        return cell2
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if selectedIndex == indexPath.row {
+            
+        }else {
+            selectedIndex = indexPath.row
+            
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if selectedIndex == indexPath.row {
+            
+            return UITableView.automaticDimension
+        }else {
+            
+            return 58
+            
+        }
+        
+    }
+    
+    func getitemfromDB(query : String,categoryfilter : String){
+        
+        let userRef = Database.database().reference().child("Items").child("kimyasalsoyma")
+        
+        userRef.observe(.value, with: { (snapshot) in
+            
+            self.itemlist.removeAll(keepingCapacity: false)
+            
+            for child in snapshot.children {
+                
+                let snap = child as! DataSnapshot //get first snapshot
+                let value = snap.value as? NSDictionary //get second snapshot
+                
+                let header = value!["header"] as? String ?? ""
+               
+                
+                var addcontrol = true
+                
+                //search filter
+                if query != "" && !header.lowercased().contains(query){
+                    addcontrol = false
+                }
+                
+//                //category filter
+//                if categoryfilter != "" && category != categoryfilter{
+//                    addcontrol = false
+//                }
+                
+                
+                if(addcontrol){
+                    self.itemlist.append(value!)
+                    self.searchitemlist.append(value!)
+                }
+                
+            }
+            
+            
+            //itemlist size control
+            if self.itemlist.count == 0 { //urun yoxdu
+               
+            }else{ //urun var
+                
+            }
+            
+            self.itemlist = self.itemlist.shuffled()
+            self.searchitemlist = self.searchitemlist.shuffled()
+            self.tableView.reloadData()
+            
+        })
+        
+    }
+    
+    
+    func getitemfromDB2(query : String,categoryfilter : String){
+        
+        let userRef = Database.database().reference().child("Items").child("ciltbakimi")
+        
+        userRef.observe(.value, with: { (snapshot) in
+            
+            self.itemlist2.removeAll(keepingCapacity: false)
+            
+            for child in snapshot.children {
+                
+                let snap = child as! DataSnapshot //get first snapshot
+                let value = snap.value as? NSDictionary //get second snapshot
+                
+                let header = value!["header"] as? String ?? ""
+                
+                
+                var addcontrol = true
+                
+                //search filter
+                if query != "" && !header.lowercased().contains(query){
+                    addcontrol = false
+                }
+                
+                //                //category filter
+                //                if categoryfilter != "" && category != categoryfilter{
+                //                    addcontrol = false
+                //                }
+                
+                
+                if(addcontrol){
+                    self.itemlist2.append(value!)
+                    self.searchitemlist2.append(value!)
+                }
+                
+            }
+            
+            
+            //itemlist size control
+            if self.itemlist.count == 0 { //urun yoxdu
+                
+            }else{ //urun var
+                
+            }
+            
+            self.itemlist2 = self.itemlist2.shuffled()
+            self.searchitemlist2 = self.searchitemlist2.shuffled()
+            self.tableView2.reloadData()
+            
+        })
+        
+    }
+    
+    
+    
+    
+}

@@ -10,14 +10,22 @@ import UIKit
 
 class cell1: UITableViewCell {
     
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var lblLorem: UILabel!
     
+    @IBOutlet weak var lblValue: UILabel!
+    
+    @IBOutlet weak var lblHeader: UILabel!
+    @IBOutlet weak var lblCount: UILabel!
+    
+    @IBOutlet weak var lblExtrainfo: UILabel!
     var btnAction : (()->())?
     
     @IBOutlet weak var btnImage: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        view.layer.cornerRadius = 10
        
     }
 

@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00231CBE24C38BE80099F5D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00231CBD24C38BE80099F5D0 /* GoogleService-Info.plist */; };
-		00785D8C24C07AF500B37CFE /* KimyasalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00785D8A24C07AF500B37CFE /* KimyasalCell.swift */; };
-		00785D8D24C07AF500B37CFE /* KimyasalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00785D8B24C07AF500B37CFE /* KimyasalCell.xib */; };
-		00785D9024C0818C00B37CFE /* KimyasalSoymaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00785D8E24C0818C00B37CFE /* KimyasalSoymaCell.swift */; };
-		00785D9124C0818C00B37CFE /* KimyasalSoymaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00785D8F24C0818C00B37CFE /* KimyasalSoymaCell.xib */; };
 		008E7C7F24C246C300FCC675 /* cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E7C7D24C246C300FCC675 /* cell1.swift */; };
 		008E7C8024C246C300FCC675 /* cell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008E7C7E24C246C300FCC675 /* cell1.xib */; };
 		00AE7C9824BFC2B200E72629 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7C9724BFC2B200E72629 /* AppDelegate.swift */; };
@@ -28,17 +24,10 @@
 		00AE7CB724BFC36D00E72629 /* OzelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7CB624BFC36D00E72629 /* OzelTextField.swift */; };
 		00AE7CB924BFC37300E72629 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7CB824BFC37300E72629 /* CircleImage.swift */; };
 		00AE7CBB24BFC37700E72629 /* roundCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7CBA24BFC37700E72629 /* roundCorners.swift */; };
-		00AE7CBF24BFC3A700E72629 /* KimyasalSoyma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7CBE24BFC3A700E72629 /* KimyasalSoyma.swift */; };
-		00AE7CC124BFC3B400E72629 /* CiltBakimi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7CC024BFC3B400E72629 /* CiltBakimi.swift */; };
-		00B24C2324C38E5F00C41003 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B24C2224C38E5F00C41003 /* HomePage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00231CBD24C38BE80099F5D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		00785D8A24C07AF500B37CFE /* KimyasalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimyasalCell.swift; sourceTree = "<group>"; };
-		00785D8B24C07AF500B37CFE /* KimyasalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KimyasalCell.xib; sourceTree = "<group>"; };
-		00785D8E24C0818C00B37CFE /* KimyasalSoymaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimyasalSoymaCell.swift; sourceTree = "<group>"; };
-		00785D8F24C0818C00B37CFE /* KimyasalSoymaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KimyasalSoymaCell.xib; sourceTree = "<group>"; };
 		008E7C7D24C246C300FCC675 /* cell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cell1.swift; sourceTree = "<group>"; };
 		008E7C7E24C246C300FCC675 /* cell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cell1.xib; sourceTree = "<group>"; };
 		00AE7C9424BFC2B200E72629 /* sutkodları.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sutkodları.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,9 +46,6 @@
 		00AE7CB624BFC36D00E72629 /* OzelTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OzelTextField.swift; sourceTree = "<group>"; };
 		00AE7CB824BFC37300E72629 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		00AE7CBA24BFC37700E72629 /* roundCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = roundCorners.swift; sourceTree = "<group>"; };
-		00AE7CBE24BFC3A700E72629 /* KimyasalSoyma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KimyasalSoyma.swift; sourceTree = "<group>"; };
-		00AE7CC024BFC3B400E72629 /* CiltBakimi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CiltBakimi.swift; sourceTree = "<group>"; };
-		00B24C2224C38E5F00C41003 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		4F8A5AB7151F92B9A9101BD4 /* Pods_sutkodlar_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sutkodlar_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9660963A8BD81C2EF63ED80F /* Pods-sutkodları.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sutkodları.release.xcconfig"; path = "Target Support Files/Pods-sutkodları/Pods-sutkodları.release.xcconfig"; sourceTree = "<group>"; };
 		B17774BAF32D3DFDE703B647 /* Pods-sutkodları.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sutkodları.debug.xcconfig"; path = "Target Support Files/Pods-sutkodları/Pods-sutkodları.debug.xcconfig"; sourceTree = "<group>"; };
@@ -100,16 +86,9 @@
 				00AE7C9724BFC2B200E72629 /* AppDelegate.swift */,
 				00AE7C9924BFC2B200E72629 /* SceneDelegate.swift */,
 				00AE7C9B24BFC2B200E72629 /* ViewController.swift */,
-				00AE7CBE24BFC3A700E72629 /* KimyasalSoyma.swift */,
-				00785D8E24C0818C00B37CFE /* KimyasalSoymaCell.swift */,
-				00785D8F24C0818C00B37CFE /* KimyasalSoymaCell.xib */,
-				00785D8A24C07AF500B37CFE /* KimyasalCell.swift */,
-				00785D8B24C07AF500B37CFE /* KimyasalCell.xib */,
-				00AE7CC024BFC3B400E72629 /* CiltBakimi.swift */,
 				008E7C7D24C246C300FCC675 /* cell1.swift */,
 				008E7C7E24C246C300FCC675 /* cell1.xib */,
 				00AE7C9D24BFC2B200E72629 /* Main.storyboard */,
-				00B24C2224C38E5F00C41003 /* HomePage.swift */,
 				00AE7CA324BFC2B400E72629 /* Assets.xcassets */,
 				00AE7CA524BFC2B400E72629 /* LaunchScreen.storyboard */,
 				00AE7CA824BFC2B400E72629 /* Info.plist */,
@@ -203,9 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00785D8D24C07AF500B37CFE /* KimyasalCell.xib in Resources */,
 				00AE7CA724BFC2B400E72629 /* LaunchScreen.storyboard in Resources */,
-				00785D9124C0818C00B37CFE /* KimyasalSoymaCell.xib in Resources */,
 				008E7C8024C246C300FCC675 /* cell1.xib in Resources */,
 				00AE7CA424BFC2B400E72629 /* Assets.xcassets in Resources */,
 				00AE7C9F24BFC2B200E72629 /* Main.storyboard in Resources */,
@@ -266,18 +243,13 @@
 				00AE7C9824BFC2B200E72629 /* AppDelegate.swift in Sources */,
 				00AE7C9A24BFC2B200E72629 /* SceneDelegate.swift in Sources */,
 				00AE7CA224BFC2B200E72629 /* sutkodlar_.xcdatamodeld in Sources */,
-				00B24C2324C38E5F00C41003 /* HomePage.swift in Sources */,
 				00AE7CB124BFC34E00E72629 /* Constraints.swift in Sources */,
 				00AE7CB724BFC36D00E72629 /* OzelTextField.swift in Sources */,
 				00AE7CB524BFC36800E72629 /* UIColor.swift in Sources */,
 				008E7C7F24C246C300FCC675 /* cell1.swift in Sources */,
-				00AE7CC124BFC3B400E72629 /* CiltBakimi.swift in Sources */,
-				00785D8C24C07AF500B37CFE /* KimyasalCell.swift in Sources */,
-				00785D9024C0818C00B37CFE /* KimyasalSoymaCell.swift in Sources */,
 				00AE7CAF24BFC34800E72629 /* CheckInternet.swift in Sources */,
 				00AE7CB324BFC36400E72629 /* Alert.swift in Sources */,
 				00AE7CBB24BFC37700E72629 /* roundCorners.swift in Sources */,
-				00AE7CBF24BFC3A700E72629 /* KimyasalSoyma.swift in Sources */,
 				00AE7CB924BFC37300E72629 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65HGM5WRRT;
 				INFOPLIST_FILE = "sutkodları/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65HGM5WRRT;
 				INFOPLIST_FILE = "sutkodları/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -101,7 +101,12 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btnImage" destination="2Tl-P0-ElM" id="QIL-1T-b6i"/>
+                <outlet property="lblCount" destination="Lh7-9i-N6j" id="5EP-TF-gNT"/>
+                <outlet property="lblExtrainfo" destination="zOQ-Yg-qhe" id="WjZ-Do-c41"/>
+                <outlet property="lblHeader" destination="KPw-rC-JPe" id="XjK-Us-HzG"/>
                 <outlet property="lblLorem" destination="BJV-Nx-oVI" id="3LJ-mN-UQa"/>
+                <outlet property="lblValue" destination="MvP-ed-b0f" id="Zjv-JM-ldF"/>
+                <outlet property="view" destination="clK-KN-C1A" id="YFY-XJ-xyP"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="123.88392857142857"/>
         </tableViewCell>
