@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00231CBE24C38BE80099F5D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00231CBD24C38BE80099F5D0 /* GoogleService-Info.plist */; };
+		00309A6E24C3B17600BFAC6B /* SplahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00309A6D24C3B17600BFAC6B /* SplahView.swift */; };
 		008E7C7F24C246C300FCC675 /* cell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E7C7D24C246C300FCC675 /* cell1.swift */; };
 		008E7C8024C246C300FCC675 /* cell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008E7C7E24C246C300FCC675 /* cell1.xib */; };
 		00AE7C9824BFC2B200E72629 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AE7C9724BFC2B200E72629 /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		00231CBD24C38BE80099F5D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		00309A6D24C3B17600BFAC6B /* SplahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplahView.swift; sourceTree = "<group>"; };
 		008E7C7D24C246C300FCC675 /* cell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cell1.swift; sourceTree = "<group>"; };
 		008E7C7E24C246C300FCC675 /* cell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cell1.xib; sourceTree = "<group>"; };
 		00AE7C9424BFC2B200E72629 /* sutkodları.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sutkodları.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 			children = (
 				00AE7C9724BFC2B200E72629 /* AppDelegate.swift */,
 				00AE7C9924BFC2B200E72629 /* SceneDelegate.swift */,
+				00309A6D24C3B17600BFAC6B /* SplahView.swift */,
 				00AE7C9B24BFC2B200E72629 /* ViewController.swift */,
 				008E7C7D24C246C300FCC675 /* cell1.swift */,
 				008E7C7E24C246C300FCC675 /* cell1.xib */,
@@ -241,6 +244,7 @@
 			files = (
 				00AE7C9C24BFC2B200E72629 /* ViewController.swift in Sources */,
 				00AE7C9824BFC2B200E72629 /* AppDelegate.swift in Sources */,
+				00309A6E24C3B17600BFAC6B /* SplahView.swift in Sources */,
 				00AE7C9A24BFC2B200E72629 /* SceneDelegate.swift in Sources */,
 				00AE7CA224BFC2B200E72629 /* sutkodlar_.xcdatamodeld in Sources */,
 				00AE7CB124BFC34E00E72629 /* Constraints.swift in Sources */,

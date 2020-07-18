@@ -11,6 +11,15 @@ import Firebase
 
 class ViewController: UIViewController {
     
+    var activityIndicator : UIActivityIndicatorView = {
+          var indicator = UIActivityIndicatorView()
+          indicator.hidesWhenStopped = true
+          indicator.style = .medium
+          indicator.color = .white
+          indicator.translatesAutoresizingMaskIntoConstraints = false
+          return indicator
+      }()
+    
     let topView : UIView = {
         let view = UIView()
         view.backgroundColor = .customBlue()
@@ -30,7 +39,7 @@ class ViewController: UIViewController {
     }()
     
     let imgLogo : UIImageView = {
-        let img = UIImageView(image: UIImage(named: ""))
+        let img = UIImageView(image: UIImage(named: "logopng"))
         img.translatesAutoresizingMaskIntoConstraints = false
         img.heightAnchor.constraint(equalToConstant: 40).isActive = true
         img.widthAnchor.constraint(equalToConstant: 40).isActive = true
@@ -71,6 +80,15 @@ class ViewController: UIViewController {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.layer.cornerRadius = 15
         searchBar.placeholder = "Arama Yap"
+        searchBar.isTranslucent = true
+        return searchBar
+    }()
+    
+    let searchbar2 : UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.layer.cornerRadius = 15
+        searchBar.placeholder = ""
         searchBar.isTranslucent = true
         return searchBar
     }()
@@ -150,7 +168,8 @@ class ViewController: UIViewController {
         
         childView.alpha = 1
         childView2.alpha = 0
-        
+        searchbar.alpha = 1
+        searchbar2.alpha = 0
         
         segmentControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         
@@ -168,7 +187,7 @@ class ViewController: UIViewController {
         
         view.addSubview(searchbar)
         
-        
+        view.addSubview(searchbar2)
         
         view.addSubview(barView)
         
@@ -186,6 +205,8 @@ class ViewController: UIViewController {
         
         childView2.addSubview(tableView2)
         
+        view.addSubview(activityIndicator)
+        
         _ = topView.anchor(top: view.safeAreaLayoutGuide.topAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor)
         
         _ = lblSutkodlari.anchor(top: topView.topAnchor, bottom: nil, leading: nil, trailing: nil,padding: .init(top: 15, left: 0, bottom: 0, right: 0))
@@ -199,6 +220,8 @@ class ViewController: UIViewController {
         lblTarih.merkezXSuperView()
         
         _ = searchbar.anchor(top: topView.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor,padding: .init(top: -22, left: 10, bottom: 0, right: 10))
+        
+         _ = searchbar2.anchor(top: topView.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor,padding: .init(top: -22, left: 10, bottom: 0, right: 10))
         
         
         _ = barView.anchor(top: searchbar.bottomAnchor, bottom: nil, leading: view.leadingAnchor, trailing: view.trailingAnchor,padding: .init(top: 15, left: 10, bottom: 0, right: 10))
@@ -224,6 +247,10 @@ class ViewController: UIViewController {
         
         _ = tableView2.anchor(top: childView2.topAnchor, bottom: childView2.bottomAnchor, leading: childView2.leadingAnchor, trailing: childView2.trailingAnchor)
         
+        _ = activityIndicator.anchor(top: lblSutkodlari.bottomAnchor, bottom: nil, leading: nil, trailing: nil,padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        activityIndicator.merkezXSuperView()
+        activityIndicator.startAnimating()
+        
         //TableView
         tableView.delegate = self
         tableView.dataSource = self
@@ -237,15 +264,27 @@ class ViewController: UIViewController {
         tableView2.dataSource = self
         tableView2.register(UINib(nibName: "cell1", bundle: nil), forCellReuseIdentifier: "cell1")
          tableView2.backgroundColor = .customBackground()
-//
-//        //SearchBar
-//        searchitemlist = itemlist
-//         searchBar.delegate = self
+        
+        //SearchBar
+        searchitemlist = itemlist
+        searchbar.delegate = self
+        searchbar2.delegate = self
         
          getitemfromDB(query: "", categoryfilter: "")
         getitemfromDB2(query: "", categoryfilter: "")
         getveri()
+        
+        
+        let gestureREcongizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(gestureREcongizer)
+        
+        topView.isHidden = false
     }
+    
+    @objc func hideKeyboard() {
+           view.endEditing(true)
+           
+       }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
@@ -282,9 +321,13 @@ class ViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             childView.alpha = 1
             childView2.alpha = 0
+            searchbar.alpha = 1
+            searchbar2.alpha = 0
         }else{
             childView.alpha = 0
             childView2.alpha = 1
+            searchbar.alpha = 0
+            searchbar2.alpha = 1
         }
     }
     
@@ -353,7 +396,9 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
             cell.lblExtrainfo.text = extrainfo
             cell.lblHeader.text = header
             cell.lblValue.text = Value
+            activityIndicator.stopAnimating()
             return cell
+           
         }
         let cell2 : cell1 = tableView.dequeueReusableCell(withIdentifier: "cell1") as! cell1
         cell2.selectionStyle = .none
@@ -520,7 +565,76 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView,willDisplay cell: UITableViewCell,forRowAt indexPath: IndexPath){
+        
+        if tableView == tableView2 {
+            if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 10{
+                if topView.isHidden {
+                    UIView.animate(withDuration: 0.35) { [unowned self] in
+                        self.topView.isHidden = false
+                        self.topView.alpha = 1
+                    }
+                }
+            }else{
+                if !topView.isHidden {
+                    UIView.animate(withDuration: 0.35) { [unowned self] in
+                        self.topView.isHidden = true
+                        self.topView.alpha = 0
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+    }
+    
     
     
     
 }
+
+extension ViewController : UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+    }
+    
+   
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar == searchbar2 {
+            if searchBar.text == "" {
+                searchBar.resignFirstResponder()
+            }else{
+                getitemfromDB2(query: (searchBar.text?.lowercased())!, categoryfilter: "")
+                searchBar.resignFirstResponder()
+            }
+        }
+        if searchBar.text == "" {
+            searchBar.resignFirstResponder()
+        }else{
+            getitemfromDB(query: (searchBar.text?.lowercased())!, categoryfilter: "")
+            searchBar.resignFirstResponder()
+        }
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar == searchbar2 {
+            if searchText == "" {
+                getitemfromDB2(query: "", categoryfilter: "")
+            }
+        }
+        
+        if searchText == "" {
+            getitemfromDB(query: "", categoryfilter: "")
+        }
+        
+        
+    }
+    
+}
+
+
+
