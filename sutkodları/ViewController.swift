@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     
     let lblTarih : UILabel = {
         let lbl = UILabel()
-        lbl.text = "00.00.0000"
+        lbl.text = ""
         lbl.font = UIFont.boldSystemFont(ofSize: 22)
         lbl.textColor  = .white
         lbl.textAlignment = .center
@@ -78,9 +78,10 @@ class ViewController: UIViewController {
     let searchbar : UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.layer.cornerRadius = 15
         searchBar.placeholder = "Arama Yap"
         searchBar.isTranslucent = true
+        searchBar.searchTextField.layer.cornerRadius = 10
+        searchBar.searchTextField.layer.masksToBounds = true
         return searchBar
     }()
     
@@ -88,7 +89,7 @@ class ViewController: UIViewController {
         let searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.layer.cornerRadius = 15
-        searchBar.placeholder = ""
+        searchBar.placeholder = "Arama Yap"
         searchBar.isTranslucent = true
         return searchBar
     }()
@@ -256,7 +257,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "cell1", bundle: nil), forCellReuseIdentifier: "cell1")
         tableView.backgroundColor = .customBackground()
-        
+        tableView.keyboardDismissMode = .onDrag
         
         
         //TableView2
@@ -264,6 +265,7 @@ class ViewController: UIViewController {
         tableView2.dataSource = self
         tableView2.register(UINib(nibName: "cell1", bundle: nil), forCellReuseIdentifier: "cell1")
          tableView2.backgroundColor = .customBackground()
+        tableView2.keyboardDismissMode = .onDrag
         
         //SearchBar
         searchitemlist = itemlist
@@ -276,6 +278,7 @@ class ViewController: UIViewController {
         
         
         let gestureREcongizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        gestureREcongizer.delegate = self
         view.addGestureRecognizer(gestureREcongizer)
         
         topView.isHidden = false
@@ -436,11 +439,10 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selectedIndex == indexPath.row {
-            
-        }else {
-            selectedIndex = indexPath.row
-            
+       if self.selectedIndex == indexPath.row {
+            self.selectedIndex = 0
+        }else{
+            self.selectedIndex = indexPath.row
         }
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -460,12 +462,13 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
         
     }
     
+    //budu
     func getitemfromDB(query : String,categoryfilter : String){
         
         let userRef = Database.database().reference().child("Items").child("kimyasalsoyma")
         
         userRef.observe(.value, with: { (snapshot) in
-            
+            //brat indi bilsen nece eliyiriy birdefe veri cekeciy hamsini ele gosterecik bu 2 denesini sil ona gore yeni cemi 1 dene collectionview olsun o kategori yerlerinde sil ta denen hoqqadiki tasarim neter olacax be bidene collection view fso ? sen mene apk atardin men baxb eliy erdimde gerey birinci tasarimi yoxe cox sey yoxdu tak tak yazacig demeli wpdan atiram indi birinci ona bax at COLLECTION VIEW BE INDIKI KIMI OLMAYACAX? indi kimi olacag bir iki seyi deyiscik tasarimi silme fsyo tasarimi deyisirem onda atdigjn kimi elirem yaxsi ele 
             self.itemlist.removeAll(keepingCapacity: false)
             
             for child in snapshot.children {
@@ -569,25 +572,12 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
         
         if tableView == tableView2 {
             if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 10{
-                if topView.isHidden {
-                    UIView.animate(withDuration: 0.35) { [unowned self] in
-                        self.topView.isHidden = false
-                        self.topView.alpha = 1
-                    }
-                }
+                
             }else{
-                if !topView.isHidden {
-                    UIView.animate(withDuration: 0.35) { [unowned self] in
-                        self.topView.isHidden = true
-                        self.topView.alpha = 0
-                    }
-                }
+                
             }
         }
-        
-        
-        
-        
+      
     }
     
     
@@ -638,3 +628,17 @@ extension ViewController : UISearchBarDelegate {
 
 
 
+extension ViewController : UIGestureRecognizerDelegate {
+
+func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    if touch.view?.isDescendant(of: self.tableView) == true {
+        return false
+    } else if
+        touch.view?.isDescendant(of: self.tableView2) == true {
+        return false
+    } else {
+        view.endEditing(true)
+        return true
+    }
+}
+}
